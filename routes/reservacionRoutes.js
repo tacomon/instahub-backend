@@ -1,7 +1,8 @@
 //Rutas Reservacion
 const express = require('express');
-const router = express.Router();
 const reservacionController = require('../controllers/reservacionController');
+
+const router = express.Router();
 
 //api Reservacion
 router.post('/', reservacionController.createReservacion);

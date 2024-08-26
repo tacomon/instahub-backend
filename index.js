@@ -20,6 +20,7 @@ app.use(express.json());
 //Routes
 app.use('/api/reservacion', require('./routes/reservacionRoutes'));
 app.use('/api/comentarios', require('./routes/comentarios'));
+app.use('/api/estatusHabitacion', require('./routes/estatusHabitacion'));
 //Escuchando en el puerto 9000
 app.listen(port, () => {
     console.log("El servidor esta corriendo en el puerto: ", port);

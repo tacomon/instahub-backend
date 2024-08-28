@@ -36,6 +36,9 @@ exports.login = async (req, res) => {
         if (!usuario) {
             return res.status(400).json({ success: false, msg: 'Credenciales inválidas' });
         }
+        if(!usuario.estatus) {
+            return res.status(400).json({ success: false, msg: 'El usuario ha sido bloqueado, contacte al administrador' });
+        }
 
         // Comparar la contraseña en texto plano proporcionada con la contraseña encriptada almacenada
         const isMatch = await bcrypt.compare(contrasena, usuario.contrasena);
@@ -56,7 +59,7 @@ exports.login = async (req, res) => {
         await enviarCorreoInicioSesion(correo, token);
 
         // Responder al cliente
-        res.json({ success: true, msg: 'Token enviado al correo electrónico' });
+        res.json({ success: true, msg: 'Token enviado al correo electrónico', nombre: usuario.nombre });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, msg: 'Error en el servidor' });

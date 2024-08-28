@@ -27,6 +27,7 @@ app.use('/api/comentarios', require('./routes/comentarios'));
 app.use('/api/estatusHabitacion', require('./routes/estatusHabitacion'));
 app.use('/api/home', homeRoute);
 app.use('/api/auth', authRoutes);
+app.use('/api/role', require('./routes/role'));
 
 //Escuchando en el puerto 9000
 app.listen(port, () => {

@@ -30,6 +30,11 @@ const userSchema = mongoose.Schema({
     fecha_registro: {
         type: Date,
         default: Date.now
+    },
+    estatus: {
+        type: Boolean,
+        required: false,
+        default: true
     }
 });
 

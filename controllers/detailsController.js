@@ -1,3 +1,4 @@
+
 const Bedroom = require('../models/bedrooms');
 
 exports.getBedroomDetails = async (req, res) => {

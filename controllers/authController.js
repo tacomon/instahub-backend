@@ -58,8 +58,7 @@ exports.login = async (req, res) => {
         // Enviar el token por correo electrónico
         await enviarCorreoInicioSesion(correo, token);
 
-        // Responder al cliente
-        res.json({ success: true, msg: 'Token enviado al correo electrónico', rol: usuario.rol, nombre: usuario.nombre });
+        res.json({ success: true, msg: 'Token enviado al correo electrónico', nombre: usuario.nombre, _id: usuario._id });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, msg: 'Error en el servidor' });

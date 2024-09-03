@@ -1,27 +1,41 @@
 const express = require('express');
 const conectarDB = require("./config/db");
 const cors = require("cors");
+const bodyParser = require('body-parser');
+const path = require('path');
 
-//Se crea el servidor
+// Crear la aplicación de Express
 const app = express();
 const port = process.env.PORT || 9000;
 
-//Conexion a MongoDB
+// Configuración de CORS para permitir peticiones desde el frontend
+app.use(cors({
+    origin: 'http://localhost:4200', // Cambia esto si tu frontend está en otro puerto o dominio
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Middleware para parsear JSON y datos codificados en la URL
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Conexión a la base de datos MongoDB
 conectarDB();
-app.use(
-    cors({
-        origin: `*`,
-        credentials: true
-    })
-);
-//Middelwares
+
+// Middleware para manejar JSON en las solicitudes
 app.use(express.json());
 
-//Routes
+// Definir las rutas
 app.use('/api/reservacion', require('./routes/reservacionRoutes'));
 app.use('/api/comentarios', require('./routes/comentarios'));
 app.use('/api/estatusHabitacion', require('./routes/estatusHabitacion'));
-//Escuchando en el puerto 9000
+app.use('/api/home', require('./routes/homeRoutes'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/role', require('./routes/role'));
+app.use('/api/bedrooms', require('./routes/roomRoutes')); 
+app.use('/api/details', require('./routes/detailsRoutes')); 
+
+// Iniciar el servidor en el puerto especificado
 app.listen(port, () => {
-    console.log("El servidor esta corriendo en el puerto: ", port);
+    console.log(`El servidor está corriendo en el puerto: ${port}`);
 });

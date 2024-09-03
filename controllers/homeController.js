@@ -3,7 +3,7 @@ const Bedroom = require('../models/bedrooms');
 
 exports.getHomeData = async (req, res) => {
   try {
-    const bedrooms = await Bedroom.find();
+    const bedrooms = await Bedroom.find({ estatus: { $in: ['Aceptado'] }});
     if (bedrooms.length === 0) {
       return res.status(404).json({ message: 'No bedrooms found' });
     }

@@ -37,8 +37,8 @@ const enviarCorreoRegistro = async (email, token) => {
         <body>
           <div class="container">
             <h1>¡Bienvenido a InstaHub!</h1>
-            <p>Gracias por registrarte en nuestra tienda en línea de productos para mascotas.</p>
-            <p>Estamos emocionados de tenerte como parte de nuestra comunidad de amantes de las mascotas. Esperamos que encuentres todo lo que necesitas para consentir a tus compañeros peludos en InstaHub.</p>
+            <p>Gracias por registrarte en nuestra tienda InstaHub.</p>
+            <p>Estamos emocionados de tenerte como parte de nuestra comunidad. Esperamos que encuentres todo lo que necesitas para consentir a tus lado viajero InstaHub.</p>
             <p>¡Que tengas un excelente día!</p>
             <p>El equipo de InstaHub</p>
           </div>

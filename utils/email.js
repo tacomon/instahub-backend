@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const habitacion = require('../models/habitacion');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -111,7 +112,62 @@ const enviarCorreoInicioSesion = async (email, token) => {
   }
 };
 
+const enviarCorreoEstatusHabitacion = async (data) => {
+  try {
+    const mailOptions = {
+      from: 'InstaHub <angelvelazsalazar@gmail.com>',
+      to: data.correo,
+      subject: `Retroalimentación a su habitación ${data.nombreHabitacion} de InstaHub`,
+      html: createPlantillaHabitacion(data)
+    };
+
+    // Enviar el correo electrónico
+    await transporter.sendMail(mailOptions);
+    console.log('Se ha notificado el estatus de la habitación a:', data.correo);
+  } catch (error) {
+    console.error('Error al enviar el correo electrónico:', error);
+  }
+}
+
+const createPlantillaHabitacion = (mensaje) => {
+  return `<!DOCTYPE html>
+        <html>
+        <head>
+        <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f5f5f5;
+          text-align: center;
+        }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+      </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>¡Estimado ${ mensaje.nombre }!</h1>
+            <p>Gracias por preferirnos al momento de publicar tu habitación.</p>
+            <p>Le hacemos saber que su habitación ha sido ${ mensaje.estatus }.</p>
+            <p>Le compartimos los comentarios brindados por el administrador: </p>
+            <p>${ mensaje.comentarios }</p>
+            <br>
+            <br>
+            <p>¡Que tengas un excelente día!</p>
+            <p>El equipo de InstaHub</p>
+          </div>
+        </body>
+        </html>
+      `
+}
+
 module.exports = {
   enviarCorreoInicioSesion,
-  enviarCorreoRegistro
+  enviarCorreoRegistro,
+  enviarCorreoEstatusHabitacion
 };

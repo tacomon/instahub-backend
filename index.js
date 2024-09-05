@@ -15,15 +15,13 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Middleware para parsear JSON y datos codificados en la URL
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 // Conexión a la base de datos MongoDB
 conectarDB();
 
 // Middleware para manejar JSON en las solicitudes
-app.use(express.json());
+// app.use(express.json());
+app.use(express.json({ limit: '120mb' }));
+app.use(express.urlencoded({ limit: '120mb', extended: true }));
 
 // Definir las rutas
 app.use('/api/reservacion', require('./routes/reservacionRoutes'));

@@ -15,6 +15,9 @@ const ReservacionSchema = mongoose.Schema({
     },
     huespedes: {
         type: Number
+    },
+    idBedrooms: {
+        type: String
     }
 });
 

@@ -10,7 +10,7 @@ const port = process.env.PORT || 9000;
 
 // Configuración de CORS para permitir peticiones desde el frontend
 app.use(cors({
-    origin: 'https://instahub-frontend.onrender.com/', // Cambia esto si tu frontend está en otro puerto o dominio
+    origin: 'http://44.201.74.32', // Cambia esto si tu frontend está en otro puerto o dominio
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
